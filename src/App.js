@@ -17,11 +17,18 @@ export default function App() {
   const getMovie = async(searchTerm) => {
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`
-    )
-  }
+    );
+    // Parse JSON response into a JavaScript object
+    const data = await response.json();
+    // Set the Movie state to the received data
+    setMovie(data);
+  };
+
+
+  // We pass the getMovie function as a prop called moviesearch
   return (
     <div className="App">
-      <Form />
+      <Form mvoiesearch ={getMovie}/>
       <MovieDisplay />
     </div>
   );
